@@ -35,4 +35,4 @@ async def get_collection_data(database: str, collection: str):
     return await delte_id(coll)
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="localhost", port=7999, log_level="info")
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
