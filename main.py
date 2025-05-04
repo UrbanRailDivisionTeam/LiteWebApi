@@ -8,17 +8,10 @@ from pymongo import MongoClient
 connect = MongoClient(host="localhost", port=27017)
 
 app = FastAPI()
-origins = [
-    "http://localhost",
-    "http://localhost:3000",
-    "http://localhost:7998",
-    "http://localhost:7999",
-    "http://10.24.5.54:7999",
-    "http://10.24.5.54:7998",
-]
+# 允许所有的跨域请求，安全性交给防火墙负责
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"] ,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
