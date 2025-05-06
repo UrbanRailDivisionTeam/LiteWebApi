@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 
-connect = MongoClient(host="localhost", port=27017)
+connect = MongoClient(host="mongodb", port=27017)
 
 app = FastAPI()
 # 允许所有的跨域请求，安全性交给防火墙负责
@@ -22,7 +22,6 @@ async def delte_id(documents: list) -> list:
     for doc in documents:
         doc_without_id = {key: value for key, value in doc.items() if key != '_id'}
         docs_without_id.append(doc_without_id)
-    print(docs_without_id)
     return docs_without_id
 
 @app.get("/db/{database}/{collection}", response_model=list[dict[str, Any]])
