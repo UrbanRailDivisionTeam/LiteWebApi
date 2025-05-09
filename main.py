@@ -5,7 +5,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 
-connect = MongoClient(host="mongodb", port=27017)
+# connect = MongoClient(host="localhost", port=27017)
+connect = MongoClient(host="10.29.1.242", port=27017)
 
 app = FastAPI()
 # 允许所有的跨域请求，安全性交给防火墙负责
