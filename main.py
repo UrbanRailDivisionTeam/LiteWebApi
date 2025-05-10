@@ -24,7 +24,7 @@ app.include_router(update_time.router)
 async def get_collection_data(database: str, collection: str):
     database_obj = connect[database]
     if collection not in database_obj.list_collection_names():
-        logging.error("数据库中没有对应的表")
+        logging.error(f"数据库中没有对应的表 {database}:{collection}")
         return []
     coll = database_obj[collection].find({}).to_list()
     return await delte_id(coll)

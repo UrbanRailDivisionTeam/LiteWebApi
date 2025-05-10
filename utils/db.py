@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
 debug_host = 'localhost'
-product_host = '10.24.1.242'
+product_host = 'mongodb'
 
-connect = MongoClient(host=debug_host, port=27017)
+connect = MongoClient(host=product_host, port=27017)
