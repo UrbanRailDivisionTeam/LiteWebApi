@@ -3,27 +3,22 @@ import uvicorn
 from typing import Any
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pymongo import MongoClient
 
-# connect = MongoClient(host="localhost", port=27017)
-connect = MongoClient(host="10.29.1.242", port=27017)
+from api import update_time
+from utils import connect, delte_id
 
 app = FastAPI()
 # 允许所有的跨域请求，安全性交给防火墙负责
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"] ,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+# 添加其他文件的路由
+app.include_router(update_time.router)
 
-async def delte_id(documents: list) -> list:
-    docs_without_id = []
-    for doc in documents:
-        doc_without_id = {key: value for key, value in doc.items() if key != '_id'}
-        docs_without_id.append(doc_without_id)
-    return docs_without_id
 
 @app.get("/db/{database}/{collection}", response_model=list[dict[str, Any]])
 async def get_collection_data(database: str, collection: str):
